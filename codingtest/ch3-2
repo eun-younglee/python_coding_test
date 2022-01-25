@@ -1,0 +1,16 @@
+# 내가 푼 방법
+
+n, m, k = map(int, input().split())
+num = list(map(int, input().split()))
+max_num = max(num) #가장 큰 수 
+num.remove(max_num)
+sec_num = max(num) #두번째로 큰 수 
+total = 0
+
+for i in range(m // (k + 1)): # 가장 큰 수 k번 더하고, 두번째로 큰 수 한 번 더하기 
+  total += max_num * k
+  total += sec_num
+for i in range(m % (k + 1)): # (k + 1)로 나눈 나머지만큼 가장 큰 수 더하기 
+  total += max_num
+
+print(total)
