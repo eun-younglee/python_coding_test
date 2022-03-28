@@ -6,8 +6,8 @@ while True:
     if n < k:
         break
     cnt += n % k  # subtracting until dividable number
-    n -= (n % k) 
-    n //= k  # divide 
+    n -= (n % k)
+    n //= k  # divide
     cnt += 1
 
 print(cnt + (n % k - 1))  # subtract leftovers
