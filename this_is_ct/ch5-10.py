@@ -1,4 +1,5 @@
 # 음료수 얼려 먹기
+from collections import deque
 
 n, m = map(int, input().split())
 graph = [list(map(int, input())) for _ in range(n)]
