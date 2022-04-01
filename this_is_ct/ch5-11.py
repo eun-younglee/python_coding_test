@@ -39,4 +39,4 @@ def bfs(x, y):
 q = deque()
 push(0, 0, 1)
 bfs(0, 0)
-print(step[n - 1][m - 1])  # get the exit's step 
+print(step[n - 1][m - 1])  # get the exit's step
