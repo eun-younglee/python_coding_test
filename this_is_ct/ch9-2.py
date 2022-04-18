@@ -32,7 +32,7 @@ def dijkstra(start):
             continue
         # check nodes connected with current node
         for i in graph[now]:
-            cost = dist + i[1]  # current distance + distance to other node
+            cost = dist + i[1]  # current distance + distance to other node(i[1])
             # if distance is shorter when passing by current node, update cost
             if cost < distance[i[0]]:
                 distance[i[0]] = cost
