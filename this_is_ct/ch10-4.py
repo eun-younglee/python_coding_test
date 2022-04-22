@@ -30,7 +30,7 @@ cycle = False
 
 for i in range(e):  # check each edge
     a, b = map(int, input().split())
-    # end if cycle occurs
+    # check if the parent is the same before union
     if find_parent(parent, a) == find_parent(parent, b):  # parent is the same
         cycle = True
         break

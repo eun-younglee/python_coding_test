@@ -30,7 +30,7 @@ def topology_sort():
     while q:  # until queue is empty
         now = q.popleft()
         for i in graph[now]:
-            result[i] = max(result[i], result[now] + time[i])
+            result[i] = result[now] + time[i]
             in_degree[i] -= 1
             # insert nodes that have 0 in-degree now
             if in_degree[i] == 0:
@@ -38,7 +38,6 @@ def topology_sort():
 
     for i in range(1, v + 1):
         print(result[i])
-    print(result)
 
 
 topology_sort()
