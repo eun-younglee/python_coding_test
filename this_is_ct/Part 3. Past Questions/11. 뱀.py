@@ -54,7 +54,7 @@ def simulate():
         if is_safe(nx, ny):
             if matrix[nx][ny] == 0:  # no apple
                 matrix[nx][ny] = 2  # mark next
-                snake.append((nx, ny))
+                snake.append((nx, ny))  # go forward
                 px, py = snake.pop(0)  # get rid of tail
                 matrix[px][py] = 0
             if matrix[nx][ny] == 1:  # yes apple
