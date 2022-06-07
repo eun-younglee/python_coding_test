@@ -4,6 +4,7 @@
 # 취약 지점을 점검하기 위해 보내야 하는 친구 수의 최솟값
 from itertools import permutations
 
+
 def solution(n, weak, dist):
     length = len(weak)
     for i in range(length):
