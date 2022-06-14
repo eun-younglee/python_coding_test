@@ -28,14 +28,14 @@ def bfs(x, y):
                 if l <= abs(graph[nx][ny] - graph[x][y]) <= r:
                     q.append((nx, ny))
                     # add to the union
-                    visited[nx][ny] = True
-                    total += graph[nx][ny]
-                    cnt += 1
-                    united.append((nx, ny))
-    # average population for united nations
+                    visited[nx][ny] = True  # mark visited
+                    total += graph[nx][ny]  # add population
+                    united.append((nx, ny))  # add to union
+                    cnt += 1  # one more country added
+    # average population for union
     for i, j in united:
         graph[i][j] = total // cnt
-    return cnt
+    return cnt  # check population migration
 
 
 move_cnt = 0
@@ -45,9 +45,9 @@ while True:
     for i in range(n):
         for j in range(n):
             if not visited[i][j]:  # not visited
-                if bfs(i, j) > 1:  # check nearby countries and if union happens
+                if bfs(i, j) > 1:  # check nearby countries
                     check = True
-    if not check:  # no more moves
+    if not check:  # no more migrations
         break
     move_cnt += 1
 print(move_cnt)
