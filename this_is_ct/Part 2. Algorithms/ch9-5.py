@@ -23,15 +23,15 @@ def dijkstra(start):
         # shortest node
         dist, now = heapq.heappop(q)
         # ignore if cost in distance is already smaller
-        if distance[now] < dist:
+        if distance[now] != dist:
             continue
         # check nodes connected with current node
-        for i in graph[now]:
-            cost = dist + i[1]  # current distance + distance to other node(i[1])
+        for target_index, target_dist in graph[now]:
+            cost = dist + target_dist  # current distance + distance to other node(i[1])
             # if distance is shorter when passing by current node, update cost
-            if cost < distance[i[0]]:
-                distance[i[0]] = cost
-                heapq.heappush(q, (cost, i[0]))
+            if cost < distance[target_index]:
+                distance[target_index] = cost
+                heapq.heappush(q, (cost, target_index))
 
 
 dijkstra(start)

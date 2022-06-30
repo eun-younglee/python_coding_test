@@ -6,37 +6,37 @@
 import heapq
 import sys
 
-input = sys.stdin.readline
 INF = sys.maxsize
+n, m = map(int, input().split())
+start = int(input())
 
-n, m = map(int, input().split())  # node / edge numbers
-start = int(input())  # starting node number
-graph = [[] for i in range(n + 1)]  # node info
-distance = [INF] * (n + 1)  # distance initialise
+graph = [[] for _ in range(n + 1)]
+distance = [INF] * (n + 1)
 
-for _ in range(m):
-    a, b, c, = map(int, input().split())
-    # c is the cost for going from a to b
+for i in range(m):
+    a, b, c = map(int, input().split())
     graph[a].append((b, c))
+    graph[b].append((a, c))
 
 
 def dijkstra(start):
     q = []
-    heapq.heappush(q, (0, start))  # push starting node
-    distance[start] = 0  # distance of the starting node is 0
-    while q:  # unless queue is empty
-        # shortest node
+    # initialise
+    heapq.heappush(q, (0, start))
+    distance[start] = 0
+
+    while q:  # until there are no more left
+        # get closest distance element
         dist, now = heapq.heappop(q)
-        # ignore if cost in distance is already smaller
-        if distance[now] < dist:
+        if dist != distance[now]:  # already visited, ignore
             continue
-        # check nodes connected with current node
-        for i in graph[now]:
-            cost = dist + i[1]  # current distance + distance to other node(i[1])
-            # if distance is shorter when passing by current node, update cost
-            if cost < distance[i[0]]:
-                distance[i[0]] = cost
-                heapq.heappush(q, (cost, i[0]))
+        # check all nodes connected to current node
+        for target_index, target_dist in graph[now]:
+            cost = dist + target_dist
+            # bypassing current node is shorter
+            if cost < distance[target_index]:
+                distance[target_index] = cost  # update cost
+                heapq.heappush(q, (cost, target_index))  # put it in heap
 
 
 dijkstra(start)
