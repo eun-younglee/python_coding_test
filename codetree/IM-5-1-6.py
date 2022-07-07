@@ -1,5 +1,7 @@
 # 코드트리 - IntermediateMid - Shortest Path - Dijkstra - 최단거리 3
 
+# 코드트리 - IntermediateMid - Shortest Path - Dijkstra - 최단거리 3
+
 import heapq
 import sys
 
@@ -23,10 +25,10 @@ def dijkstra(start):
         if curr_cost != distance[curr_index]:
             continue  # duplicates
         for target_index, target_cost in graph[curr_index]: # connected to current node
-            cost = curr_cost + target_cost  # calculate cost
-            if cost < distance[target_index]:  # if cost is smaller
-                distance[target_index] = cost  # update cost
-                heapq.heappush(q, (cost, target_index))  # put to heapq
+            cost = curr_cost + target_cost
+            if cost < distance[target_index]:
+                distance[target_index] = cost
+                heapq.heappush(q, (cost, target_index))
 
 
 dijkstra(start)
