@@ -1,6 +1,5 @@
 # 코드트리 - Intermediate Mid - Greedy - Greedy - 폭탄 해체 작업
 
-import heapq
 n = int(input())
 # (score, time limit)
 bombs = [tuple(map(int, input().split())) for _ in range(n)]
