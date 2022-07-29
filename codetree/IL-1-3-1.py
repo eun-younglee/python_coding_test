@@ -1,4 +1,4 @@
-# 코드트리 - Intermediate Low - Simulation - 격자 안에서 터지고 떨어지는 경우 - 1차원 젠가 
+# 코드트리 - Intermediate Low - Simulation - 격자 안에서 터지고 떨어지는 경우 - 1차원 젠가
 
 n = int(input())
 tower = []
