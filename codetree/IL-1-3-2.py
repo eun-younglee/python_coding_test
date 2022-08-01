@@ -1,4 +1,4 @@
-# 코드트리 - Intermediate Low - Simulation - 격자 안에서 터지고 떨어지는 경우 - 십자 모양 폭발 
+# 코드트리 - Intermediate Low - Simulation - 격자 안에서 터지고 떨어지는 경우 - 십자 모양 폭발
 
 n = int(input())
 graph = [list(map(int, input().split())) for _ in range(n)]
