@@ -1,4 +1,4 @@
-# 코드트리 - Intermediate Low - Simulation - 격자 안에서 단일 객체를 이동 - 주사위 던지기 
+# 코드트리 - Intermediate Low - Simulation - 격자 안에서 단일 객체를 이동 - 주사위 던지기
 
 n, m, r, c = map(int, input().split())
 x, y = r - 1, c - 1  # rearrange
