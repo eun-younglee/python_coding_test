@@ -7,6 +7,47 @@
 # 게임이 몇 초에 끝나는지 출력하기
 
 n = int(input())
+graph = [[0] * n for _ in range(n)]
+# apple
 k = int(input())
-apple = [list(map(int, input().split())) for _ in range(k)]
+for _ in range(k):
+    a, b = map(int, input().split())
+    graph[a - 1][b - 1] = 1  # have apple
+# snake
 l = int(input())
+change = [input().split() for _ in range(l)]  # direction change info, L or D
+change_index = 0
+
+snake = []  # snake position
+x_head, y_head = 0, 0
+headed = 0  # headed right
+dxs, dys = [0, 1, 0, -1], [1, 0, -1, 0]  # E S W N
+second = 0
+
+
+def in_range(x, y):
+    return 0 <= x < n and 0 <= y < n
+
+
+while True:
+    # change direction
+    if second == int(change[change_index][0]):  # same second
+        direction = change[change_index][1]
+        if direction == "D":  # turn to the right
+            headed = (headed + 1) % 4
+        else:  # turn to the left
+            headed = (headed - 1) % 4
+        if change_index < l - 1:  # update index
+            change_index += 1
+    temp_x, temp_y = x_head + dxs[headed], y_head + dys[headed]  # head goes to next place
+    second += 1  # one second passed
+    # bump to a wall or oneself, break
+    if not in_range(temp_x, temp_y) or [temp_x, temp_y] in snake:
+        break
+    if graph[temp_x][temp_y] == 0:  # no apple, remove tail
+        if snake:
+            snake.pop(0)
+    snake.append([x_head, y_head])  # put original head to snake
+    x_head, y_head = temp_x, temp_y  # update head
+
+print(second)
