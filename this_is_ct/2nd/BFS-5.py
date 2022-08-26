@@ -6,6 +6,7 @@
 # 장애물을 3개 설치하여 모든 학생이 선생님의 감시를 피할 수 있는지 출력 - YES / NO
 
 from itertools import combinations
+from collections import deque
 import copy
 
 n = int(input())
@@ -13,6 +14,7 @@ graph = []
 teachers, empty = [], []
 for i in range(n):
     line = list(input().split())
+    graph.append(line)
     for j in range(n):
         if line[j] == 'X':  # empty locations
             empty.append([i, j])
@@ -20,25 +22,45 @@ for i in range(n):
             teachers.append([i, j])
 
 
-def check_teacher(graph_new, teacher):
-    pass
+def can_go(x, y, visited):
+    if x < 0 or x >= n or y < 0 or y >= n:
+        return False
+    if visited[x][y]:
+        return False
+    return True
 
 
-def surveillance(graph_new):
-    for teacher in teachers:
-        if check_teacher(graph_new, teacher) is True:  # student found, return false
-            return False
-    return True  # all student safe
+def check_teachers(teachers):
+    visited = [[False] * n for _ in range(n)]
+    dxs, dys = [0, 1, 0, -1], [1, 0, -1, 0]
+    q = deque(teachers)
+    while q:
+        x, y = q.popleft()
+        for dx, dy in zip(dxs, dys):
+            nx, ny = x + dx, y + dy
+            if can_go(nx, ny, visited):
+                if graph_new[nx][ny] == 'S':  # found student
+                    return False
+                if graph_new[nx][ny] == 'O':  # obstacle found, stop
+                    break
+                if graph_new[nx][ny] == 'X':  # empty, keep searching
+                    q.append([nx, ny])
+                    visited[nx][ny] = True
+    return True
 
 
 can_escape = False
 obstacles = list(combinations(empty, 3))  # get three obstacles
+
+graph_new = copy.deepcopy(graph)
 for obstacle in obstacles:
-    # install obstacle
-    graph_new = copy.deepcopy(graph)
-    if surveillance(graph_new):  # check if everyone escapes surveillance
+    for ox, oy in obstacle:  # install obstacles
+        graph_new[ox][oy] = 'O'
+    if check_teachers(teachers):  # check if everyone escapes surveillance
         can_escape = True
         break
+    graph_new = copy.deepcopy(graph)  # reset graph
+
 if can_escape:
     print("YES")
 else:
